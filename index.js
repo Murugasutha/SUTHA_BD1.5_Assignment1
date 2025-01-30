@@ -1,8 +1,10 @@
 const express = require('express');
 const { resolve } = require('path');
+let cors = require('cors');
 
 const app = express();
 const port = 3000;
+app.use(cors());
 
 // endpoint 1. total price of the items
 
@@ -15,7 +17,7 @@ app.get('/cart-total', (req, res) => {
 
 //endpoint 2. Apply a discount based on membership status
 function applyDiscount(cartTotal) {
-  let discount = 10;
+  let discount = 10; // 10%
   return cartTotal - cartTotal * (discount / 100);
 }
 app.get('/membership-discount', (req, res) => {
@@ -31,7 +33,7 @@ app.get('/membership-discount', (req, res) => {
 
 //Endpoint 3 : Calculate tax on the cart total
 function applyTax(cartTotal) {
-  let tax = 5;
+  let tax = 5; // 5%
   return cartTotal * (tax / 100);
 }
 app.get('/calculate-tax', (req, res) => {
